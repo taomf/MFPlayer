@@ -37,6 +37,41 @@
           "class": "uni.dcloud.io.uniplugin_richalert.RichAlertModule"
         }
       ]
+    },
+    {
+      "hooksClass": "com.ygzy.finance_elec.FinanceHooks",
+      "plugins": [
+        {
+          "type": "module",
+          "name": "finance_elec",
+          "class": "com.ygzy.finance_elec.FinanceWeighModule"
+        },
+        {
+          "type": "component",
+          "name": "camera-preview",
+          "class": "com.ygzy.finance_elec.component.CameraPreView"
+        },
+        {
+          "type": "module",
+          "name": "PrinterModule",
+          "class": "com.ygzy.finance_elec.PrinterModule"
+        },
+        {
+          "type": "module",
+          "name": "ScanModule",
+          "class": "com.ygzy.finance_elec.ScanModule"
+        },
+        {
+          "type": "module",
+          "name": "TakePhotoModule",
+          "class": "com.ygzy.finance_elec.TakePhotoModule"
+        },
+        {
+          "type": "module",
+          "name": "ActionSheetModule",
+          "class": "com.ygzy.finance_elec.ActionSheetModule"
+        }
+      ]
     }
   ]
 }

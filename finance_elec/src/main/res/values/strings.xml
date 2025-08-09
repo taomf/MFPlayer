@@ -1,0 +1,8 @@
+<resources>
+    <string name="scan_service_name">扫码服务</string>
+
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="no_network">！网络未连接，请检查网络设置</string>
+    <string name="network_error">！无法连接到服务器，请检查您的网络连接并稍后再试</string>
+</resources>

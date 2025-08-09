@@ -2,3 +2,5 @@ include ':app'
 include ':uniplugin_module'
 include ':uniplugin_component'
 include ':mf-palyer'
+include ':finance_elec'
+

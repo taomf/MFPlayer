@@ -1,0 +1,98 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 34
+    namespace 'com.ygzy.finance_elec'
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 34
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+
+    compileOnly fileTree(dir: '../app/libs', include: ['uniapp-v8-release.aar'])
+
+    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
+    compileOnly 'androidx.legacy:legacy-support-v4:1.0.0'
+    compileOnly 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.alibaba:fastjson:1.2.83'
+    implementation 'com.facebook.fresco:fresco:1.13.0'
+
+     // Android工具集合
+    implementation 'com.blankj:utilcodex:1.31.1'
+    //串口工具
+    implementation 'io.github.xmaihh:serialport:2.1.1'
+    implementation 'org.greenrobot:eventbus:3.2.0'
+
+    //  CameraX相机
+    // CameraX core library using the camera2 implementation
+    def camerax_version = "1.2.0-alpha02"
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX VideoCapture library
+    implementation "androidx.camera:camera-video:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:${camerax_version}"
+    // If you want to additionally add CameraX ML Kit Vision Integration
+    implementation "androidx.camera:camera-mlkit-vision:${camerax_version}"
+    // If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    implementation 'com.google.android.material:material:1.9.0'
+    //屏幕适配全尺寸
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+//    api fileTree(include: ['*.jar','*.aar'], dir: 'libs')
+//    api fileTree(include: ['*.jar','*.aar'], dir: '../app/libs')
+    compileOnly files('../app/libs/autoreplyprint.aar')
+    compileOnly files('../app/libs/qhLog.aar')
+    compileOnly files('../app/libs/qhScaleLib-release.aar')
+
+    implementation "io.reactivex.rxjava2:rxjava:2.1.0" // 必要rxjava2依赖
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'  // 必要rxandrroid依赖，切线程时需要用到
+
+//    // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库
+//    implementation  'com.umeng.umsdk:common:+'// 必选
+//    implementation  'com.umeng.umsdk:asms:+'// 必选
+//    implementation 'com.umeng.umsdk:uyumao:+' // 高级运营分析功能依赖库，使用U-App卸载分析、开启反作弊能力请务必集成。common需搭配v9.6.3及以上版本，asms需搭配v1.7.0及以上版本。需更新隐私声明。
+//    implementation 'com.umeng.umsdk:apm:+'// U-APM产品包依赖，必选
+
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如4.0.3
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+
+}
