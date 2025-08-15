@@ -48,8 +48,9 @@ dependencies {
     // Android工具集合
     implementation 'com.blankj:utilcodex:1.31.1'
 
-    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+    implementation 'cn.jzvd:jiaozivideoplayer:7.7.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
 }

@@ -30,6 +30,15 @@ android {
         }
     }
 
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = variant.buildType.name == 'release' ?
+                        "智.apk" :
+                        "android_debug.apk"
+            }
+    }
+
     buildTypes {
         release {
             signingConfig signingConfigs.config
@@ -83,7 +92,8 @@ dependencies {
     implementation project(':uniplugin_module')
     implementation project(':uniplugin_component')
 
-    implementation project(':finance_elec')
+//    implementation project(':finance_elec')
+    implementation project(':mf-palyer')
 
 
     // uts依赖
