@@ -53,6 +53,9 @@ public class AGVideo extends JzvdStd {
     private DismissNextViewTimerTask mDismissNextViewTimerTask;
     private boolean clickPlayOrPause;
 
+    private boolean isHiddenRateBtn = false;
+    private boolean isHiddenRefinitionBtn = false;
+
     public AGVideo(Context context) {
         super(context);
     }
@@ -548,7 +551,7 @@ public class AGVideo extends JzvdStd {
             quickRetreat.setVisibility(VISIBLE);
             replayTextView.setVisibility(GONE);
         } else if (state == STATE_PREPARING) {
-            backButton.setVisibility(VISIBLE);
+//            backButton.setVisibility(VISIBLE);
         } else if (state == STATE_ERROR) {
             startButton.setVisibility(INVISIBLE);
             replayTextView.setVisibility(GONE);
@@ -592,7 +595,7 @@ public class AGVideo extends JzvdStd {
     public void setScreenNormal() {
         screen = SCREEN_NORMAL;
         fullscreenButton.setImageResource(cn.jzvd.R.drawable.jz_enlarge);
-        backButton.setVisibility(View.VISIBLE);
+        backButton.setVisibility(View.GONE);
         tinyBackImageView.setVisibility(View.INVISIBLE);
         changeStartButtonSize((int) getResources().getDimension(cn.jzvd.R.dimen.jz_start_button_w_h_normal));
         batteryTimeLayout.setVisibility(View.GONE);
@@ -610,7 +613,18 @@ public class AGVideo extends JzvdStd {
     public void setScreenFullscreen() {
         super.setScreenFullscreen();
 //        next_bottom.setVisibility(View.VISIBLE);
-        tvSpeed.setVisibility(View.VISIBLE);
+        if (this.isHiddenRateBtn){
+            tvSpeed.setVisibility(View.GONE);
+        } else {
+            tvSpeed.setVisibility(View.VISIBLE);
+        }
+
+        if (this.isHiddenRefinitionBtn){
+            clarity.setVisibility(View.GONE);
+        } else {
+            clarity.setVisibility(View.VISIBLE);
+        }
+
 //        tvSelectPart.setVisibility(View.VISIBLE);
         fullscreenButton.setVisibility(View.GONE);
         lock.setVisibility(View.VISIBLE);
@@ -979,6 +993,14 @@ public class AGVideo extends JzvdStd {
         } else {
             tvSpeed.setText(speed + "X");
         }
+    }
+
+    public void setHiddenRateBtn(Boolean hiddenRateBtn ) {
+        this.isHiddenRateBtn = hiddenRateBtn;
+    }
+
+    public void setHiddenRefinitionBtn(Boolean hiddenRefinitionBtn) {
+        this.isHiddenRefinitionBtn = hiddenRefinitionBtn;
     }
 
     @Override

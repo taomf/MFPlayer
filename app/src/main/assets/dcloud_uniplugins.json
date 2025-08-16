@@ -5,7 +5,7 @@
       "plugins": [
         {
           "type": "component",
-          "name": "MFPlayer",
+          "name": "dc-smallPlayer",
           "class": "com.tmf.player.MFPlayer"
         }
       ]

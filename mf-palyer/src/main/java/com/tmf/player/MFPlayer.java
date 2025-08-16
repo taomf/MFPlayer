@@ -69,9 +69,6 @@ public class MFPlayer extends UniComponent<AGVideo> implements AGVideo.JzVideoLi
 
     @UniJSMethod
     public void play() {
-        ToastUtils.showShort("播放");
-        LogUtils.d("taomf==", mPlayer == null );
-        LogUtils.d("taomf==", mPlayer.mediaInterface == null );
         if (mPlayer.mediaInterface == null){
             mPlayer.startVideo();
             return;
@@ -84,23 +81,48 @@ public class MFPlayer extends UniComponent<AGVideo> implements AGVideo.JzVideoLi
 
     @UniJSMethod
     public void pause() {
-        ToastUtils.showShort("暂停");
         mPlayer.mediaInterface.pause();
     }
 
     @SuppressLint("CheckResult")
     @UniJSMethod
     public void initPlayer(JSONObject options) {
-        LogUtils.d("taomf==", options.toJSONString());
         JSONObject video = options.getJSONObject("video");
-
         LinkedHashMap<String, String> map = JSONObject.parseObject(video.toJSONString(),LinkedHashMap.class);
+        LinkedHashMap<String, String> dataMap = new LinkedHashMap<>();
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            switch (entry.getKey()) {
+                case "cif":
+                    dataMap.put("普通", entry.getValue());
+                    break;
+                case "hd":
+                    dataMap.put("高清", entry.getValue());
+                    break;
+                case "sd":
+                    dataMap.put("超清", entry.getValue());
+                    break;
+            }
+
+        }
+
+        // logo
         String logoUrlString =  options.getString("logoUrlString");
+        String title =  options.getString("title");
+        //倍速
+        boolean isHiddenRateBtn =  options.getBoolean("isHiddenRateBtn");
+        //清晰度
+        boolean isHiddenRefinitionBtn =  options.getBoolean("isHiddenRefinitionBtn");
+
+        mPlayer.setHiddenRateBtn(isHiddenRateBtn);
+        mPlayer.setHiddenRefinitionBtn(isHiddenRefinitionBtn);
 
         Glide.with(mUniSDKInstance.getContext()).load(logoUrlString).into((ImageView)mPlayer.findViewById(R.id.screen));
 
-        mJzDataSource = new JZDataSource(map);
+        mJzDataSource = new JZDataSource(dataMap,title);
         mPlayer.setUp(mJzDataSource,0);
+
+        play();
     }
 
     @Override
@@ -123,13 +145,12 @@ public class MFPlayer extends UniComponent<AGVideo> implements AGVideo.JzVideoLi
 
     @Override
     public void backClick() {
-        ToastUtils.showShort("返回");
         if (mPlayer.screen == mPlayer.SCREEN_FULLSCREEN) {
             dismissSpeedPopAndEpisodePop();
             AGVideo.backPress();
         } else {
 //            finish();
-            fireEvent("exitPlayer");
+            fireEvent("exitVideoPlay");
         }
     }
 
@@ -167,7 +188,7 @@ public class MFPlayer extends UniComponent<AGVideo> implements AGVideo.JzVideoLi
     public void completion() {
         ToastUtils.showShort("播放完成");
 
-        fireEvent("completion");
+        fireEvent("endVideoPlayEvent");
     }
 
     @Override
@@ -180,7 +201,7 @@ public class MFPlayer extends UniComponent<AGVideo> implements AGVideo.JzVideoLi
         number.put("position", position);
         number.put("duration", duration);
         params.put("detail", number);
-        fireEvent("onProgress", params);
+        fireEvent("timeUpdatePlayEvent", params);
     }
 
     @Override

@@ -100,6 +100,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:padding="6dp"
                 android:id="@+id/clarity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,6 +111,7 @@
                 android:textColor="#ffffff" />
 
             <TextView
+                android:padding="6dp"
                 android:id="@+id/tv_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,6 +122,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_select_parts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
